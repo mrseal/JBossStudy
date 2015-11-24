@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+@NamedQuery(name = "findByTitle", query = "SELECT t.title FROM Track t WHERE t.disc.id=:discId")
+
 @Entity
 @Table(name = "tracks")
 public class Track implements Serializable {
@@ -18,16 +20,16 @@ public class Track implements Serializable {
 	@Column
 	private String title;
 
-	@Column
+	@JoinColumn(name = "cd_id", referencedColumnName = "id", nullable = false)
+	@ManyToOne
 	private CompactDisc disc;
 
 	public Track() {
 
 	}
 
-	public Track(String title, CompactDisc disc) {
+	public Track(String title) {
 		this.title = title;
-		this.disc = disc;
 	}
 
 	public Integer getId() {

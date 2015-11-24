@@ -2,6 +2,8 @@ package com.cf.study.jboss.jpa.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -24,6 +26,9 @@ public class CompactDisc implements Serializable {
 
 	@Column
 	private Double price;
+
+	@OneToMany(mappedBy = "disc", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	private List<Track> trackTitles = new ArrayList<Track>();
 
 	// @Column
 	// private Date releaseDate;
@@ -69,10 +74,23 @@ public class CompactDisc implements Serializable {
 		this.price = price;
 	}
 
+	public List<Track> getTrackTitles() {
+		return trackTitles;
+	}
+
+	public void setTrackTitles(List<Track> trackTitles) {
+		this.trackTitles = trackTitles;
+	}
+
+	public void addTrack(Track t) {
+		t.setDisc(this);
+		trackTitles.add(t);
+	}
+
 	@Override
 	public String toString() {
-		return "CompactDisc [id=" + id + ", title=" + title + ", artist="
-				+ artist + ", price=" + price + "]";
+		return "CompactDisc [id=" + id + ", title=" + title + ", artist=" + artist + ", price=" + price
+				+ ", trackTitles=" + trackTitles + "]";
 	}
 
 }
