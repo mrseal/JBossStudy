@@ -11,22 +11,32 @@ import com.cf.study.jboss.entities.CompactDisc;
 @Alternative
 public class JPACompactDiscDAO implements CompactDiscDAO {
 
-	private EntityManager entityManager;
+	private EntityManagerFactory emFactory;
+
+	public JPACompactDiscDAO() {
+		emFactory = Persistence.createEntityManagerFactory("conygrePersistenceUnit");
+	}
 
 	public Collection<CompactDisc> getAllDiscs() {
 		System.out.println("JPA Compact Disc DAO");
+		EntityManager em = getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
 		Query query = getEntityManager().createQuery("FROM CompactDisc");
 		List<CompactDisc> discs = query.getResultList();
+		tx.commit();
+		safeClose(em);
 		return discs;
 	}
 
 	private EntityManager getEntityManager() {
-		if (entityManager == null) {
-			EntityManagerFactory factory = Persistence
-					.createEntityManagerFactory("conygrePersistenceUnit");
-			entityManager = factory.createEntityManager();
+		return emFactory.createEntityManager();
+	}
+
+	private void safeClose(EntityManager em) {
+		if (em != null) {
+			em.close();
 		}
-		return entityManager;
 	}
 
 }

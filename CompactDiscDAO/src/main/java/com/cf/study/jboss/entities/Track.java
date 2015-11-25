@@ -56,7 +56,7 @@ public class Track implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Track [id=" + id + ", title=" + title + ", disc=" + disc + "]";
+		return "Track [id=" + id + ", title=" + title + "]";
 	}
 
 }

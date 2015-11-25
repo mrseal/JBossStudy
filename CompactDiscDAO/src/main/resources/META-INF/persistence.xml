@@ -12,7 +12,7 @@
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.connection.driver.class" value="com.mysql.jdbc.Driver" />
-			<property name="hibernate.connection.url" value="jdbc:mysql://52.31.119.135:3306/conygre" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://52.30.68.255:3306/conygre" />
 			<property name="hibernate.connection.username" value="bbc" />
 			<property name="hibernate.connection.password" value="bbc" />
 		</properties>
