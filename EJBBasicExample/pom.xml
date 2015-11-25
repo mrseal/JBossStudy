@@ -1,0 +1,129 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.cf.study.jboss.ejb</groupId>
+	<artifactId>EJBBasicExample</artifactId>
+	<version>1.0.1-SNAPSHOT</version>
+	<packaging>ejb</packaging>
+
+	<properties>
+		<skipTests>true</skipTests>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-javaee-6.0</artifactId>
+			<version>3.0.3.Final</version>
+			<type>pom</type>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<version>1.0.3.Final</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>arquillian-jbossas-remote</id>
+			<properties>
+				<skipTests>false</skipTests>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.jboss.spec</groupId>
+					<artifactId>jboss-javaee-6.0</artifactId>
+					<version>3.0.1.Final</version>
+					<type>pom</type>
+					<!-- xalan is messed up in the JBoss spec apparently with a cyclic dependency 
+						so has to be removed -->
+					<exclusions>
+						<exclusion>
+							<groupId>org.apache.xalan</groupId>
+							<artifactId>xalan</artifactId>
+						</exclusion>
+					</exclusions>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.as</groupId>
+					<!-- For 'managed' container, the Arquillian starts the server automatically -->
+					<artifactId>jboss-as-arquillian-container-managed</artifactId>
+					<!-- For 'remote' container, the server has to be started manually -->
+					<!-- <artifactId>jboss-as-arquillian-container-remote</artifactId> -->
+					<version>7.1.1.Final</version>
+					<scope>test</scope>
+				</dependency>
+
+				<dependency>
+					<groupId>org.jboss.arquillian.protocol</groupId>
+					<artifactId>arquillian-protocol-servlet</artifactId>
+					<version>1.0.3.Final</version>
+				</dependency>
+
+				<dependency>
+					<groupId>xalan</groupId>
+					<artifactId>xalan</artifactId>
+					<version>2.7.1</version>
+				</dependency>
+			</dependencies>
+
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>2.3.2</version>
+						<configuration>
+							<source>1.7</source>
+							<target>1.7</target>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-ejb-plugin</artifactId>
+						<version>2.3</version>
+						<configuration>
+							<ejbVersion>3.1</ejbVersion>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>2.12</version>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<ejbVersion>3.1</ejbVersion>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
