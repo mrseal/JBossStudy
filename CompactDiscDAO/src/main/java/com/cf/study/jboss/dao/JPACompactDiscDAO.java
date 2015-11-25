@@ -1,16 +1,6 @@
 package com.cf.study.jboss.dao;
 
 import java.util.Collection;
-<<<<<<< Updated upstream
-
-import com.cf.study.jboss.entities.CompactDisc;
-
-public class JPACompactDiscDAO implements CompactDiscDAO {
-
-	public Collection<CompactDisc> getAllDiscs() {
-		System.out.println("JPA Compact Disc DAO");
-		return null;
-=======
 import java.util.List;
 
 import javax.enterprise.inject.Alternative;
@@ -37,7 +27,6 @@ public class JPACompactDiscDAO implements CompactDiscDAO {
 			entityManager = factory.createEntityManager();
 		}
 		return entityManager;
->>>>>>> Stashed changes
 	}
 
 }
