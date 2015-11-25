@@ -1,7 +1,6 @@
 package com.cf.study.jboss.service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
 
 import javax.inject.Inject;
 
@@ -13,11 +12,8 @@ public class CompactDiscService {
 	@Inject
 	private CompactDiscDAO dao;
 
-	public Set<CompactDisc> getCatalog() {
-		Set<CompactDisc> discs = new HashSet<CompactDisc>();
-		dao.getAllDiscs();
-//		discs.addAll(dao.getAllDiscs());
-		return discs;
+	public Collection<CompactDisc> getCatalog() {
+		return dao.getAllDiscs();
 	}
 
 }
