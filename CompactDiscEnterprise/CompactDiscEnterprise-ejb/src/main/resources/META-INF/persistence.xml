@@ -6,8 +6,8 @@
 	<persistence-unit name="conygrePersistenceUnit">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:/mySQL</jta-data-source>
-		<class>com.cf.study.jboss.end2end.app.entities.CompactDisc</class>
-		<class>com.cf.study.jboss.end2end.app.entities.Track</class>
+		<class>com.cf.study.jboss.end2end.application.entities.CompactDisc</class>
+		<class>com.cf.study.jboss.end2end.application.entities.Track</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
 		</properties>

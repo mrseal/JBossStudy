@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @Table(name = "compact_discs")
@@ -26,8 +29,8 @@ public class CompactDisc implements Serializable {
 	@Column
 	private Double price;
 
-	@OneToMany(mappedBy = "disc", cascade = { CascadeType.MERGE,
-			CascadeType.PERSIST })
+	@JsonIgnore
+	@OneToMany(mappedBy = "disc", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	private List<Track> trackTitles = new ArrayList<Track>();
 
 	public CompactDisc() {
@@ -84,11 +87,10 @@ public class CompactDisc implements Serializable {
 		trackTitles.add(t);
 	}
 
-	@Override
-	public String toString() {
-		return "CompactDisc [id=" + id + ", title=" + title + ", artist="
-				+ artist + ", price=" + price + ", trackTitles=" + trackTitles
-				+ "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "CompactDisc [id=" + id + ", title=" + title + ", artist=" + artist + ", price=" + price
+//				+ ", trackTitles=" + trackTitles + "]";
+//	}
 
 }
